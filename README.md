@@ -26,7 +26,8 @@ Note: The `studentJoinCourse` table shows relationships between students and cou
 #### Snippet 3. Authentication Use Case Diagrams
 - Users can register with a new username and password.
 - Users can log in using a username and password.
-  <img width="452" alt="image" src="https://github.com/ahmedjanwar/StudentsManagementSystem/assets/57673382/c75c5471-8062-4ff8-af9a-b89548cf8059">
+  
+<img width="452" alt="image" src="https://github.com/ahmedjanwar/StudentsManagementSystem/assets/57673382/c75c5471-8062-4ff8-af9a-b89548cf8059">
 
 
 ### b. Student / Course API
