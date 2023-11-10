@@ -1,0 +1,28 @@
+-- Create the Student and Course tables
+CREATE TABLE students (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  grade VARCHAR(10) NOT NULL
+);
+
+CREATE TABLE courses (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(255) NOT NULL,
+  teacher_name VARCHAR(255) NOT NULL
+);
+
+-- Create the studentJoinCourse table to represent relationships between students and courses
+CREATE TABLE studentJoinCourse (
+  student_id INT,
+  course_id INT,
+  FOREIGN KEY (student_id) REFERENCES students(id),
+  FOREIGN KEY (course_id) REFERENCES courses(id),
+  PRIMARY KEY (student_id, course_id)
+);
+
+-- Create the Authentication table for storing user information
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL,
+  password_hash VARCHAR(255) NOT NULL
+);
