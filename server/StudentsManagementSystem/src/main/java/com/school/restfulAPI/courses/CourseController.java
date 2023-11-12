@@ -7,7 +7,7 @@ import com.school.restfulAPI.courses.Course;
 import com.school.restfulAPI.courses.CourseService;
 
 @RestController
-@RequestMapping("/courses")
+@RequestMapping("/api/courses")
 public class CourseController {
 
     @Autowired
