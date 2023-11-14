@@ -21,7 +21,7 @@ CREATE TABLE studentJoinCourse (
   PRIMARY KEY (student_id, course_id)
 );
 
--- Create the Authentication table for storing user information
+-- Create the Authentication table for storing user information auth is needed to be studied
 CREATE TABLE users (
   id INT PRIMARY KEY AUTO_INCREMENT,
   username VARCHAR(255) NOT NULL,
