@@ -21,9 +21,9 @@ CREATE TABLE   (
   PRIMARY KEY (student_id, course_id)
 );
 
--- Create the Authentication table for storing user information auth is needed to be studied
-CREATE TABLE users (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  username VARCHAR(255) NOT NULL,
-  password_hash VARCHAR(255) NOT NULL
-);
+  -- Create the Authentication table for storing user information auth is needed to be studied
+  CREATE TABLE users (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(255) NOT NULL,
+    password_hash VARCHAR(255) NOT NULL
+  );
