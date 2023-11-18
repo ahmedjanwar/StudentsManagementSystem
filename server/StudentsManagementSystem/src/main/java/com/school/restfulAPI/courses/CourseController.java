@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.school.restfulAPI.courses.Course;
 import com.school.restfulAPI.courses.CourseService;
+import com.school.restfulAPI.students.Student;
 
 @RestController
 @RequestMapping("/api/courses")

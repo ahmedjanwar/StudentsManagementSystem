@@ -5,6 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.school.restfulAPI.courses.Course;
 import com.school.restfulAPI.courses.CourseRepository;
+import com.school.restfulAPI.enrollment.Enrollment;
+import com.school.restfulAPI.enrollment.EnrollmentRepository;
+import com.school.restfulAPI.students.Student;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -34,9 +37,16 @@ public class CourseServiceImpl implements CourseService {
             courseRepository.save(course);
         }
     }
+    
 
     @Override
     public void deleteCourse(Long id) {
         courseRepository.deleteById(id);
     }
+
+	@Override
+	public List<Student> getStudentsEnrolledInCourse(Long courseId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }
