@@ -32,7 +32,7 @@ public class EnrollmentController {
         return enrollmentService.getEnrollmentByStudentAndCourse(student, course);
     }
 
-    @PostMapping("/api/enroll")
+    @PostMapping("/enroll")
     public void enrollStudentInCourse(
             @RequestParam Long studentId,
             @RequestParam Long courseId) {
@@ -42,7 +42,7 @@ public class EnrollmentController {
         enrollmentService.enrollStudentInCourse(student, course);
     }
 
-    @PostMapping("/api/withdraw")
+    @PostMapping("/withdraw")
     public void withdrawStudentFromCourse(
             @RequestParam Long studentId,
             @RequestParam Long courseId) {
