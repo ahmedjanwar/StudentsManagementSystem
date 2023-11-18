@@ -13,7 +13,7 @@ CREATE TABLE courses (
 );
 
 -- Create the studentJoinCourse table to represent relationships between students and courses
-CREATE TABLE studentJoinCourse (
+CREATE TABLE   (
   student_id INT,
   course_id INT,
   FOREIGN KEY (student_id) REFERENCES students(id),
