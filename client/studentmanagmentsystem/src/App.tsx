@@ -6,6 +6,7 @@ import './App.css'; // Import a CSS file for styling (create this file later)
 import StudentsList from './Components/Students/StudentList';
 import CoursesList from './Components/Courses/CoursesList';
 import Header from './Components/Header';
+import Login from './Components/Auth/Login';
 
 const App: React.FC = () => {
   return (
@@ -13,8 +14,9 @@ const App: React.FC = () => {
       <div>
         <Header />
         <Routes>
-          <Route path="/students" Component={StudentsList} />
-          <Route path="/courses" Component={CoursesList} />
+            <Route path="/students" element={<StudentsList />} />
+            <Route path="/courses" element={<CoursesList />} />
+            <Route path="/login" element={<Login />} />
         </Routes>
       </div>
     </Router>
