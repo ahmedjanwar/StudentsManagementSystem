@@ -1,0 +1,41 @@
+.h1 {
+  text-align: center;
+}
+
+.students-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: flex-start; /* Center the cards */
+  padding: 20px; /* Add padding around the container */
+}
+
+.student-card {
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 250px; /* Set a minimum width for each card */
+  box-sizing: border-box;
+  text-align: center;
+  margin-bottom: 20px; /* Add margin at the bottom for spacing */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.student-image-container {
+  width: 100px;
+  height: 100px;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto 10px;
+}
+
+.student-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+button {
+  margin-top: 10px;
+  cursor: pointer;
+}

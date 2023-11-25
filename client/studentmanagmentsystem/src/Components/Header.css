@@ -1,0 +1,33 @@
+/* src/components/Header.css */
+.header-container {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+  }
+  
+  nav {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .nav-list {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .nav-item {
+    text-align: center;
+  }
+  
+  .nav-item a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    font-size: 16px;
+  }
+  
+  .nav-item a:hover {
+    color: #ffcc00; /* Change color on hover */
+  }
+  
