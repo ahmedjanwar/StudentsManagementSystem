@@ -26,7 +26,7 @@ public class MySecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Disable CSRF for simplicity in development
+                .csrf(csrf -> csrf.disable()) 
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
                                 .requestMatchers("/api/users/register").permitAll()
@@ -45,7 +45,7 @@ public class MySecurityConfig {
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.setAllowCredentials(true);
-        configuration.addAllowedOrigin("http://localhost:3000/login"); 
+        configuration.addAllowedOrigin("http://localhost:3000"); 
         configuration.addAllowedMethod("*");
         configuration.addAllowedHeader("*");
         source.registerCorsConfiguration("/**", configuration);
