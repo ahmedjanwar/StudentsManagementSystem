@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Header.css'; // Import a CSS file for styling (create this file later)
+import './Header.css'; 
 
 const Header: React.FC = () => {
   return (
@@ -12,6 +12,9 @@ const Header: React.FC = () => {
           </li>
           <li className="nav-item">
             <Link to="/courses">Courses</Link>
+          </li>
+          <li className="nav-item">
+            <Link to="/login">Login</Link>
           </li>
         </ul>
       </nav>

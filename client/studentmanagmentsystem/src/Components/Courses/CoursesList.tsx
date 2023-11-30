@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { fetchCourses, fetchEnrollments } from '../../api/api';
-import './CourseList.css'; // Import a CSS file for styling (create this file later)
+import './CourseList.css'; 
 
 const CourseList: React.FC = () => {
   const [courses, setCourses] = useState<any[]>([]);
@@ -16,7 +16,7 @@ const CourseList: React.FC = () => {
   const fetchAllCourses = async () => {
     try {
       const data = await fetchCourses();
-      console.log('Fetched Courses:', data); // Log the fetched data
+      console.log('Fetched Courses:', data); // Log the fetched data for verification
 
       // If searchId is empty, show all courses; otherwise, filter by course ID
       const filteredCourses = searchId

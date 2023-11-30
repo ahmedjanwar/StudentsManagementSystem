@@ -8,6 +8,7 @@ import com.school.restfulAPI.courses.CourseService;
 import com.school.restfulAPI.students.Student;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/courses")
 public class CourseController {
 

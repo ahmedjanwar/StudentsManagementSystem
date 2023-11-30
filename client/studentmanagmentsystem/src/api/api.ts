@@ -1,4 +1,5 @@
-const BASE_URL = 'http://localhost:8080/api';
+const MAIN_URL = 'http://localhost:8080';
+const BASE_URL = 'http://localhost:8080/api'
 
 const fetchData = async (url: string, options?: RequestInit) => {
   const response = await fetch(url, options);
@@ -143,7 +144,7 @@ export const registerUser = async (userData: any) => {
 };
 
 export const loginUser = async (userData: any) => {
-  const url = `${BASE_URL}/users/login`;
+  const url = `${MAIN_URL}/login`;
   const options: RequestInit = {
     method: 'POST',
     headers: {
@@ -151,6 +152,5 @@ export const loginUser = async (userData: any) => {
     },
     body: JSON.stringify(userData),
   };
-
   return fetchData(url, options);
 };

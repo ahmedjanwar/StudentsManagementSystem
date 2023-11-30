@@ -1,18 +1,30 @@
 import React, { useState } from 'react';
 import './Login.css'; 
+import { loginUser } from '../../api/api';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
 
-  const handleLogin = (e: { preventDefault: () => void; }) => {
+  const handleLogin = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
-
-    // Add your login logic here
-    console.log('Username:', username);
-    console.log('Password:', password);
-
-    // You can perform authentication checks and navigate the user to another page upon successful login
+    
+    try {
+      const response = await loginUser({
+        username,
+        password,
+      });
+  
+      if (response.ok) {
+        // Login successful, you can redirect or handle accordingly
+        console.log('Login successful');
+      } else {
+        // Login failed, handle error
+        console.error('Login failed');
+      }
+    } catch (error) {
+      console.error('Error during login:', error);
+    }
   };
 
   return (
@@ -25,7 +37,7 @@ const Login = () => {
               <input
                 type="text"
                 className="login__input"
-                placeholder="User name / Email"
+                placeholder="User name"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />

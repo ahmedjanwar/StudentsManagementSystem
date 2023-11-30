@@ -13,6 +13,7 @@ import com.school.restfulAPI.students.Student;
 import com.school.restfulAPI.students.StudentService;
 
 @RestController
+@CrossOrigin
 @RequestMapping("/api/enrollments")
 public class EnrollmentController {
 
