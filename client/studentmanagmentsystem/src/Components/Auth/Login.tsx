@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -20,6 +22,7 @@ const Login: React.FC = () => {
       console.log(response)
       if (response.ok) {
         console.log('Login successful');
+        navigate('/students');
         // Do something after successful login
       } else {
         console.error('Login failed');
