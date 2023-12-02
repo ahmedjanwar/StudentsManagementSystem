@@ -1,4 +1,5 @@
-package com.school.restfulAPI;
+package com.school.restfulAPI.auth;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

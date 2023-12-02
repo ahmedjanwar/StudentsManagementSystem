@@ -1,11 +1,11 @@
-package com.school.restfulAPI;
+package com.school.restfulAPI.auth;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.school.restfulAPI.MainController.GreetingJson;
+import com.school.restfulAPI.auth.MainController.GreetingJson;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
