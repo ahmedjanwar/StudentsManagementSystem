@@ -10,6 +10,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.school.restfulAPI.jwt.TokenService;
+
 import static org.springframework.security.config.Customizer.withDefaults;
 
 @Configuration
@@ -17,6 +19,8 @@ public class MySecurityConfig {
 
     @Autowired
     private MyAuthenticationProvider authenticationProvider;
+    @Autowired
+    private TokenService tokenService;
 
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
@@ -36,7 +40,10 @@ public class MySecurityConfig {
                                 .requestMatchers("/api/courses").permitAll()
                                 .anyRequest().authenticated()
                 )
-                .formLogin(withDefaults());
+                .formLogin(withDefaults())
+                .formLogin()
+                .successHandler(new CustomAuthenticationSuccessHandler(tokenService));
+
 
         http.authenticationProvider(authenticationProvider);
 

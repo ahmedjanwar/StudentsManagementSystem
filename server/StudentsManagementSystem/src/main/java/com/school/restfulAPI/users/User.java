@@ -1,5 +1,9 @@
 package com.school.restfulAPI.users;
 
+import java.util.Collection;
+
+import org.springframework.security.core.GrantedAuthority;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -16,6 +20,12 @@ public class User {
 
     private String username;
     private String password_hash;
+    
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // Return the list of authorities/roles for the user
+        // You might need to adjust this based on your user model
+        return null;
+    }
     
 	public String getUsername() {
 		return username;

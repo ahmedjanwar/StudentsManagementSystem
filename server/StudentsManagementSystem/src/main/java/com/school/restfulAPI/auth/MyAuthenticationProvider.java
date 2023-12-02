@@ -1,6 +1,5 @@
 package com.school.restfulAPI.auth;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,10 +11,9 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import com.school.restfulAPI.jwt.TokenService;
 import com.school.restfulAPI.users.User;
 import com.school.restfulAPI.users.UserRepository;
-
-import java.util.Arrays;
 
 @Component
 public class MyAuthenticationProvider implements AuthenticationProvider {
@@ -26,6 +24,9 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
+    @Autowired
+    private TokenService tokenService;
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String username = authentication.getName();
@@ -34,11 +35,14 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         User user = userRepository.findByUsername(username);
 
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
-            return new UsernamePasswordAuthenticationToken(username, password, Arrays.asList());
+            // Generate a token upon successful authentication
+            String token = tokenService.generateToken(username);
+
+            // Return the token along with the authenticated user
+            return new UsernamePasswordAuthenticationToken(username, token, user.getAuthorities());
         } else {
-            // Return a ResponseEntity with the appropriate status code and error message
-            String errorMessage = "Invalid username or password";
-            return (Authentication) ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
+            // If authentication fails, throw BadCredentialsException
+            throw new BadCredentialsException("Invalid username or password");
         }
     }
 

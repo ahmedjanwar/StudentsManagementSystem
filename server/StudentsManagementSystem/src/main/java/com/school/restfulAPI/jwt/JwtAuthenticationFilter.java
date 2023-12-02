@@ -1,8 +1,12 @@
 package com.school.restfulAPI.jwt;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import jakarta.servlet.FilterChain;
@@ -36,16 +40,30 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         filterChain.doFilter(request, response);
     }
+    
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+            // existing code
+            .addFilterBefore(new JwtAuthenticationFilter(tokenService), UsernamePasswordAuthenticationFilter.class);
+
+        return http.build();
+    }
 
     private String extractToken(HttpServletRequest request) {
-		return null;
         // Logic to extract the token from the request, e.g., from headers or cookies
         // Return null if no token is found
+        String authorizationHeader = request.getHeader("Authorization");
+        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
+            return authorizationHeader.substring(7); // Remove "Bearer " prefix
+        }
+        return null;
     }
 
     private String getUsernameFromToken(String token) {
-		return token;
         // Logic to extract the username from the token
         // Return null if the token is invalid or expired
+        // Replace this with the actual logic to extract the username
+        return null;
     }
 }
