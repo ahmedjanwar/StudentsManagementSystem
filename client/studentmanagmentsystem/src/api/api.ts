@@ -3,7 +3,7 @@ const BASE_URL = 'http://localhost:8080/api'
 
 const fetchData = async (url: string, options?: RequestInit) => {
   const response = await fetch(url, options);
-
+  console.log(response)
   if (!response.ok) {
     throw new Error(`Request failed with status: ${response.status}`);
   }
@@ -126,7 +126,7 @@ export const deleteEnrollment = async (studentId: number, courseId: number) => {
 
 // Users API
 export const fetchUsers = async (id?: number) => {
-  const url = id ? `${BASE_URL}/users/${id}` : `${BASE_URL}/users`;
+  const url = id ? `${BASE_URL}/users/${id}` : `${BASE_URL}/users/all`;
   return fetchData(url);
 };
 
@@ -145,12 +145,37 @@ export const registerUser = async (userData: any) => {
 
 export const loginUser = async (userData: any) => {
   const url = `${MAIN_URL}/login`;
+
+  // Convert user data to URL-encoded form data
+  const formData = new URLSearchParams();
+  formData.append('username', userData.username);
+  formData.append('password', userData.password);
+  console.log(formData.toString())
   const options: RequestInit = {
     method: 'POST',
+    body: formData.toString(), // Convert FormData to string
     headers: {
-      'Content-Type': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded',
     },
-    body: JSON.stringify(userData),
   };
-  return fetchData(url, options);
+
+  try {
+    const response = await fetchData(url, options);
+
+    // Log the full response content
+    console.log('Full Response:', await response.text());
+
+    if (response.ok) {
+      // Login successful, you can redirect or handle accordingly
+      console.log('Login successful');
+    } else {
+      // Login failed, handle error
+      console.error('Login failed');
+    }
+
+    return response;
+  } catch (error) {
+    console.error('Error during login:', error);
+    throw error;
+  }
 };

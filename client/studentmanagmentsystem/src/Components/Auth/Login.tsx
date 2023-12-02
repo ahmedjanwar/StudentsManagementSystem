@@ -1,29 +1,37 @@
 import React, { useState } from 'react';
-import './Login.css'; 
-import { loginUser } from '../../api/api';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './Login.css';
 
 const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
-  const handleLogin = async (e: { preventDefault: () => void; }) => {
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     try {
-      const response = await loginUser({
-        username,
-        password,
+      const response = await axios.post("http://localhost:8080/login", {
+        username: username,
+        password: password,
       });
-  
-      if (response.ok) {
-        // Login successful, you can redirect or handle accordingly
-        console.log('Login successful');
+      console.log("username:"+ username);
+      console.log("Password:"+ password);
+      // Log the full response content
+      console.log('Full Response:', response);
+
+      if (response.data) {
+        // Assuming that a non-empty response means successful login
+        // You may need to adjust this based on your actual response structure
+        navigate('/login');
       } else {
-        // Login failed, handle error
-        console.error('Login failed');
+        // Handle other cases
+        alert('Login failed. Please check your credentials.');
       }
     } catch (error) {
       console.error('Error during login:', error);
+      alert('An error occurred during login');
     }
   };
 
@@ -57,7 +65,6 @@ const Login = () => {
               <i className="button__icon fas fa-chevron-right"></i>
             </button>
           </form>
-          
         </div>
         <div className="screen__background">
           <span className="screen__background__shape screen__background__shape4"></span>
