@@ -3,7 +3,6 @@ const BASE_URL = 'http://localhost:8080/api'
 
 const fetchData = async (url: string, options?: RequestInit) => {
   const response = await fetch(url, options);
-  console.log(response)
   if (!response.ok) {
     throw new Error(`Request failed with status: ${response.status}`);
   }

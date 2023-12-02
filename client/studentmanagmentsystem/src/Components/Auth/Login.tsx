@@ -1,37 +1,33 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import './Login.css';
 
-const Login = () => {
+const Login: React.FC = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const navigate = useNavigate();
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const handleLogin = async () => {
     try {
-      const response = await axios.post("http://localhost:8080/login", {
-        username: username,
-        password: password,
+      const response = await fetch('http://localhost:8080/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: new URLSearchParams({
+          username: username,
+          password: password,
+        }).toString(),
       });
-      console.log("username:"+ username);
-      console.log("Password:"+ password);
-      // Log the full response content
-      console.log('Full Response:', response);
-
-      if (response.data) {
-        // Assuming that a non-empty response means successful login
-        // You may need to adjust this based on your actual response structure
-        navigate('/login');
+      console.log(response)
+      if (response.ok) {
+        console.log('Login successful');
+        // Do something after successful login
       } else {
-        // Handle other cases
-        alert('Login failed. Please check your credentials.');
+        console.error('Login failed');
+        // Handle failed login
       }
     } catch (error) {
       console.error('Error during login:', error);
-      alert('An error occurred during login');
+      // Handle error
     }
   };
 
@@ -39,28 +35,32 @@ const Login = () => {
     <div className="container">
       <div className="screen">
         <div className="screen__content">
-          <form className="login" onSubmit={handleLogin}>
+          <form className="login">
             <div className="login__field">
-              <i className="login__icon fas fa-user"></i>
-              <input
-                type="text"
-                className="login__input"
-                placeholder="User name"
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-              />
+              <label>
+                Username:
+                <input
+                  type="text"
+                  className="login__input"
+                  placeholder="User name"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </label>
             </div>
             <div className="login__field">
-              <i className="login__icon fas fa-lock"></i>
-              <input
-                type="password"
-                className="login__input"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-              />
+              <label>
+                Password:
+                <input
+                  type="password"
+                  className="login__input"
+                  placeholder="Password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
             </div>
-            <button type="submit" className="button login__submit">
+            <button type="button" onClick={handleLogin} className="button login__submit">
               <span className="button__text">Log In Now</span>
               <i className="button__icon fas fa-chevron-right"></i>
             </button>

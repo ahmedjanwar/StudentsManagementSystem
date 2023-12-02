@@ -1,6 +1,8 @@
 package com.school.restfulAPI;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -29,11 +31,13 @@ public class MyAuthenticationProvider implements AuthenticationProvider {
         String password = authentication.getCredentials().toString();
 
         User user = userRepository.findByUsername(username);
-        
+
         if (user != null && passwordEncoder.matches(password, user.getPassword())) {
             return new UsernamePasswordAuthenticationToken(username, password, Arrays.asList());
         } else {
-            throw new BadCredentialsException("Invalid username or password");
+            // Return a ResponseEntity with the appropriate status code and error message
+            String errorMessage = "Invalid username or password";
+            return (Authentication) ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(errorMessage);
         }
     }
 
