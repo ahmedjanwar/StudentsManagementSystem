@@ -25,7 +25,7 @@ const StudentsList: React.FC = () => {
     try {
       await deleteStudent(id);
       // After successful deletion, fetch the updated list of students
-      fetchAllStudents();
+      await fetchAllStudents();
     } catch (error) {
       console.error('Error deleting student:', error);
     }

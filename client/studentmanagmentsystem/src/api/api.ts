@@ -1,12 +1,18 @@
 const MAIN_URL = 'http://localhost:8080';
 const BASE_URL = 'http://localhost:8080/api'
+const LOCAL_URL = 'http://localhost:3000'
+
+// get token 
+const getToken = () => {
+  return localStorage.getItem('token');
+};
 
 const fetchData = async (url: string, options?: RequestInit) => {
   const response = await fetch(url, options);
   if (!response.ok) {
     throw new Error(`Request failed with status: ${response.status}`);
   }
-
+  
   return response.json();
 };
 
@@ -18,10 +24,19 @@ export const fetchStudents = async (id?: number) => {
 
 export const addStudent = async (studentData: any) => {
   const url = `${BASE_URL}/students`;
+  const token = getToken();
+
+  if (!token) {
+    // Handle the case where the token is not available
+    console.error('Token not available');
+    return; // or throw an error, redirect to login, etc.
+  }
+
   const options: RequestInit = {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `${token}`,
     },
     body: JSON.stringify(studentData),
   };
@@ -31,10 +46,19 @@ export const addStudent = async (studentData: any) => {
 
 export const updateStudent = async (id: number, studentData: any) => {
   const url = `${BASE_URL}/students/${id}`;
+  const token = getToken();
+
+  if (!token) {
+    // Handle the case where the token is not available
+    console.error('Token not available');
+    return; // or throw an error, redirect to login, etc.
+  }
+
   const options: RequestInit = {
     method: 'PUT',
     headers: {
       'Content-Type': 'application/json',
+      'Authorization': `${token}`,
     },
     body: JSON.stringify(studentData),
   };
@@ -43,11 +67,22 @@ export const updateStudent = async (id: number, studentData: any) => {
 };
 
 export const deleteStudent = async (id: number) => {
+  const token = getToken();
+  
+  if (!token) {
+    // Handle the case where the token is not available
+    console.error('Token not available');
+    return; // or throw an error, redirect to login, etc.
+  }
+
   const url = `${BASE_URL}/students/${id}`;
   const options: RequestInit = {
     method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `${token}`,
+    },
   };
-
   return fetchData(url, options);
 };
 
@@ -143,38 +178,38 @@ export const registerUser = async (userData: any) => {
 };
 
 export const loginUser = async (userData: any) => {
-  const url = `${MAIN_URL}/login`;
+  const url = `${LOCAL_URL}/auth/login`;
 
-  // Convert user data to URL-encoded form data
-  const formData = new URLSearchParams();
-  formData.append('username', userData.username);
-  formData.append('password', userData.password);
-  console.log(formData.toString())
-  const options: RequestInit = {
-    method: 'POST',
-    body: formData.toString(), // Convert FormData to string
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-  };
-
+  const username = userData[0]
+  const password = userData[1]
   try {
-    const response = await fetchData(url, options);
-
-    // Log the full response content
-    console.log('Full Response:', await response.text());
-
-    if (response.ok) {
-      // Login successful, you can redirect or handle accordingly
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        username: username,
+        password: password,
+      }).toString(),
+    });
+    if (!response.url.endsWith('error')) {
       console.log('Login successful');
-    } else {
-      // Login failed, handle error
-      console.error('Login failed');
-    }
+      const token = response.headers.get('Authorization');
 
-    return response;
+      // Save the token to local storage
+      if (token !== null) {
+      localStorage.setItem('token', token);
+      }
+      else{console.log("no token provided")}
+      //navigate('/students');
+      // Do something after successful login
+    } else {
+      console.error('Login failed');
+      // Handle failed login
+    }
   } catch (error) {
     console.error('Error during login:', error);
-    throw error;
+    // Handle error
   }
 };

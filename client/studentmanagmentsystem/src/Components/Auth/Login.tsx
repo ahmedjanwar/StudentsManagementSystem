@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
+import { loginUser } from '../../api/api';
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState('');
@@ -8,30 +9,10 @@ const Login: React.FC = () => {
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const response = await fetch('http://localhost:8080/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({
-          username: username,
-          password: password,
-        }).toString(),
-      });
-      console.log(response)
-      if (!response.url.endsWith('error')) {
-        console.log('Login successful');
-        //navigate('/students');
-        // Do something after successful login
-      } else {
-        console.error('Login failed');
-        // Handle failed login
-      }
-    } catch (error) {
-      console.error('Error during login:', error);
-      // Handle error
-    }
+    const data = [username,password]
+    await loginUser(data)
+    setUsername('')
+    setPassword('')
   };
 
   return (
