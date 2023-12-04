@@ -177,6 +177,10 @@ export const registerUser = async (userData: any) => {
   return fetchData(url, options);
 };
 
+export const logoutUser = async () =>{
+  localStorage.removeItem('token');
+}
+
 export const loginUser = async (userData: any) => {
   const url = `${LOCAL_URL}/auth/login`;
 
@@ -201,8 +205,9 @@ export const loginUser = async (userData: any) => {
       if (token !== null) {
       localStorage.setItem('token', token);
       }
-      else{console.log("no token provided")}
+      else{console.log("token already exists")}
       //navigate('/students');
+      return "ok"
       // Do something after successful login
     } else {
       console.error('Login failed');

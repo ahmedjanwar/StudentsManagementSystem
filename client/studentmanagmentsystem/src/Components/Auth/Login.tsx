@@ -1,20 +1,39 @@
-import React, { useState } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
-import { loginUser } from '../../api/api';
+import { loginUser, logoutUser } from '../../api/api';
 
-const Login: React.FC = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
+interface LoginProps {
+  updateUsername: (newUsername: string) => void;
+}
+
+const Login: React.FC<LoginProps> = ({ updateUsername }) => {
+  const [username, setUsername] = React.useState('');
+  const [password, setPassword] = React.useState('');
   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    const data = [username,password]
-    await loginUser(data)
-    setUsername('')
-    setPassword('')
+    const data = { username, password };
+    try {
+      const result = await loginUser(data);
+
+      if (result === "ok") {
+
+        updateUsername(username);
+
+        navigate("/students");
+      }
+    } catch (error) {
+      // Handle error, show error message, etc.
+    }
   };
 
+  const handleLogout = async () => {
+    // Assuming you have a logoutUser function in your API
+    await logoutUser();
+    // Redirect to the login page or any other desired page
+    navigate("/login");
+  };
   return (
     <div className="container">
       <div className="screen">
@@ -62,3 +81,11 @@ const Login: React.FC = () => {
 };
 
 export default Login;
+function setShowLoginHeader(username: string) {
+  throw new Error('Function not implemented.');
+}
+
+function updateUsername(newUsername: any) {
+  throw new Error('Function not implemented.');
+}
+

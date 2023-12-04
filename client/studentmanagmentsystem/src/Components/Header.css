@@ -1,33 +1,61 @@
-/* src/components/Header.css */
+/* Header.css */
 .header-container {
-    background-color: #333;
-    color: white;
-    padding: 10px;
-  }
-  
-  nav {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .nav-list {
-    list-style-type: none;
-    display: flex;
-    gap: 20px;
-  }
-  
-  .nav-item {
-    text-align: center;
-  }
-  
-  .nav-item a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    font-size: 16px;
-  }
-  
-  .nav-item a:hover {
-    color: #ffcc00; /* Change color on hover */
-  }
-  
+  background-color: #333;
+  color: white;
+  padding: 10px;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between; /* Distribute items evenly */
+}
+
+.nav-list {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-item {
+  text-align: center;
+}
+
+.nav-item a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.nav-item a:hover {
+  color: #ffcc00;
+}
+
+.user-info {
+  display: flex;
+  align-items: center;
+}
+
+.login-link {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.login-link:hover {
+  color: #ffcc00;
+}
+
+.logout-button {
+  margin-left: 10px; /* Adjust margin as needed */
+  background-color: #ffcc00;
+  color: #333;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #e6b800;
+}
