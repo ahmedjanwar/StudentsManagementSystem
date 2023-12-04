@@ -16,7 +16,7 @@ const CourseList: React.FC = () => {
   const fetchAllCourses = async () => {
     try {
       const data = await fetchCourses();
-      console.log('Fetched Courses:', data); // Log the fetched data for verification
+      //console.log('Fetched Courses:', data); // Log the fetched data for verification
 
       // If searchId is empty, show all courses; otherwise, filter by course ID
       const filteredCourses = searchId

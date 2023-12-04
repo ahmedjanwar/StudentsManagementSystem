@@ -20,9 +20,9 @@ const Login: React.FC = () => {
         }).toString(),
       });
       console.log(response)
-      if (response.ok) {
+      if (!response.url.endsWith('error')) {
         console.log('Login successful');
-        navigate('/students');
+        //navigate('/students');
         // Do something after successful login
       } else {
         console.error('Login failed');

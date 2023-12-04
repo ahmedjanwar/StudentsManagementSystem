@@ -14,7 +14,7 @@ const StudentsList: React.FC = () => {
   const fetchAllStudents = async () => {
     try {
       const data = await fetchStudents();
-      console.log('Fetched Students:', data); // Log the fetched data
+      //console.log('Fetched Students:', data); // Log the fetched data
       setStudents(data);
     } catch (error) {
       console.error('Error fetching students:', error);
