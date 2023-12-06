@@ -107,3 +107,16 @@ Note: The `studentJoinCourse` table shows relationships between students and cou
    - Endpoint: `/login` or `/users/login`
    - Method: POST
    - Provide username and password in the request body to obtain a JWT token.
+# Demo images
+
+## front-End
+
+### Students
+<img width="1440" alt="Screenshot 2023-12-06 at 16 17 47" src="https://github.com/ahmedjanwar/StudentsManagementSystem/assets/57673382/3259e79a-5686-49ad-a4f3-3028d2829371">
+
+### Courses
+<img width="1440" alt="Screenshot 2023-12-06 at 16 18 13" src="https://github.com/ahmedjanwar/StudentsManagementSystem/assets/57673382/6075c524-4383-43a0-9592-2a7f277d49d9">
+
+### Login 
+<img width="1440" alt="Screenshot 2023-12-06 at 16 18 31" src="https://github.com/ahmedjanwar/StudentsManagementSystem/assets/57673382/793d740e-e8ee-44e7-9914-25ad08b257a6">
+
