@@ -55,16 +55,15 @@ Note: The `studentJoinCourse` table shows relationships between students and cou
 ### c. Authentication API
 - POST /register: Register a new user with a username and password (JSON in the request).
 - POST /login: Check the username and password; if correct, return a JWT token.
-
 # API Gateways
 
 | Gateway         | Endpoint               | Purpose                       | Authentication Required |
 | --------------- | ---------------------- | ----------------------------- | ------------------------ |
 | Users API       | `/api/users`           | Manage user information      | Yes                      |
-| Students API    | `/api/students`        | CRUD operations on students  | Yes                      |
+| Students API    | `/api/students`        | CRUD operations on students  | No (Read operations)     |
+|                |                        |                               | Yes (Create, Update, Delete) |
 | Courses API     | `/api/courses`         | CRUD operations on courses   | Yes                      |
-| Enrollments API | `/api/enrollments`     | Manage student enrollments    | Yes                      |
-| Authentication  | `/api/auth`            | User login and authentication | No                      |
+| Authentication  | `/login` or `/users/login`| User login and authentication | No                      |
 
 ## Authentication Details
 
@@ -73,15 +72,12 @@ Note: The `studentJoinCourse` table shows relationships between students and cou
   - Uses JWT for authentication.
 
 - **Students API:**
-  - Requires authentication for all CRUD operations.
+  - Requires authentication for Create, Update, and Delete operations.
+  - No authentication required for Read operations.
   - Uses JWT for authentication.
 
 - **Courses API:**
   - Requires authentication for all CRUD operations.
-  - Uses JWT for authentication.
-
-- **Enrollments API:**
-  - Requires authentication for all operations.
   - Uses JWT for authentication.
 
 - **Authentication:**
@@ -96,19 +92,13 @@ Note: The `studentJoinCourse` table shows relationships between students and cou
 
 2. **Students API:**
    - Endpoint: `/api/students`
-   - Methods: GET, POST, PUT, DELETE
+   - Methods: GET (No authentication), POST, PUT, DELETE (Requires authentication)
 
 3. **Courses API:**
    - Endpoint: `/api/courses`
    - Methods: GET, POST, PUT, DELETE
 
-4. **Enrollments API:**
-   - Endpoint: `/api/enrollments`
-   - Methods: GET, POST, PUT, DELETE
-
-5. **Authentication:**
-   - Endpoint: `/api/auth/login`
+4. **Authentication:**
+   - Endpoint: `/login` or `/users/login`
    - Method: POST
    - Provide username and password in the request body to obtain a JWT token.
-
-
