@@ -65,6 +65,11 @@ Note: The `studentJoinCourse` table shows relationships between students and cou
 | Courses API     | `/api/courses`         | CRUD operations on courses   | Yes                      |
 | Authentication  | `/login` or `/users/login`| User login and authentication | No                      |
 
+## Authentication username and password
+| Username         | password               | 
+| --------------- | ---------------------- |
+| admin2      | admin2                     |
+
 ## Authentication Details
 
 - **Users API:**
